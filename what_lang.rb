@@ -3,6 +3,19 @@ require 'pry'
 class WhatLang
 	attr_accessor :path_to_file
 
+	def language
+    file = File.open(@path_to_file, "rb")
+    contents = file.read
+		input_words = contents.scan(/\w+/)
+		scores = language_scores(input_words)
+		result = language_result(scores).gsub(/_\d.txt/, '')
+		if deviation(scores, result)
+	    "Text is written in #{result}"
+	  else
+	  	"cannot identify language from our references, or input text is too short"
+	  end
+	end
+
   def language_scores(input_words)
   	scores = Hash.new(0)
   	Dir.foreach('rep_files') do |item|
@@ -20,20 +33,16 @@ class WhatLang
   	largest_hash_key = language_scores.sort_by{|name, number| number}.last.first
   end
 
-  def language
-    file = File.open(@path_to_file, "rb")
-    contents = file.read
-		input_words = contents.scan(/\w+/)
-		scores = language_scores(input_words)
-    result = "Text is written in #{language_result(scores).gsub(/_\d.txt/, '')}"
+	def deviation(scores, result)
+		result_language_files = scores.select {|k,v| k.match(result)}
+		language_mean = mean_result(result_language_files)
+		mean = mean_result(scores)
+		return true if language_mean - mean > 5
 	end
 
-	# standard_deviation between all the file occurances
-	# standard_deviation between each language
+	def mean_result(result_language_files)
+		arr = result_language_files.flatten.map {|x| Integer(x) rescue nil }.compact
+		mean = (arr.inject(:+) / arr.size)
+	end
 
 end
-  
-	# path_to_file = "english_example.txt"
-	# what_lang = WhatLang.new
-	# what_lang.path_to_file = path_to_file
-	# puts what_lang.language
