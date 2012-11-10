@@ -20,13 +20,12 @@ class WhatLang
   	largest_hash_key = language_scores.sort_by{|name, number| number}.last.first
   end
 
-  def language #(path_to_file)
-
+  def language
     file = File.open(@path_to_file, "rb")
     contents = file.read
 		input_words = contents.scan(/\w+/)
 		scores = language_scores(input_words)
-    result = language_result(scores)
+    result = "Text is written in #{language_result(scores).gsub(/_\d.txt/, '')}"
 	end
 
 	# standard_deviation between all the file occurances
@@ -34,7 +33,7 @@ class WhatLang
 
 end
   
-	path_to_file = "gaelic_example.txt"
-	what_lang = WhatLang.new
-	what_lang.path_to_file = path_to_file
-	puts what_lang.language
+	# path_to_file = "english_example.txt"
+	# what_lang = WhatLang.new
+	# what_lang.path_to_file = path_to_file
+	# puts what_lang.language
