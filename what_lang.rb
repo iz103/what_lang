@@ -1,18 +1,7 @@
 require 'pry'
 
-  # def gaelic_score(input_words)
-  # 	gaelic_string = File.open("rep_files/gaelic_1.txt", "rb").read
-		# gaelic_words = gaelic_string.scan(/\w+/)
-		# intersection = input_words & gaelic_words
-		# gaelic_score = intersection.size
-  # end
-
-  # def english_score(input_words)
-  # 	english_string = File.open("rep_files/english_1.txt", "rb").read
-		# english_words = english_string.scan(/\w+/)
-		# intersection = input_words & english_words
-		# english_score = intersection.size
-  # end
+class WhatLang
+	attr_accessor :path_to_file
 
   def language_scores(input_words)
   	scores = Hash.new(0)
@@ -24,24 +13,28 @@ require 'pry'
 			language_score = intersection.size
 		  scores[item] = language_score
     end
-    binding.pry
+    scores
   end
 
-  def language_result(results)
-  	results.max.first.to_s
+  def language_result(language_scores)
+  	largest_hash_key = language_scores.sort_by{|name, number| number}.last.first
   end
 
-  def language(path_to_file)
-    file = File.open("gaelic_example.txt", "rb")
+  def language #(path_to_file)
+
+    file = File.open(@path_to_file, "rb")
     contents = file.read
 		input_words = contents.scan(/\w+/)
-
-		language_scores(input_words)
-		# gaelic_score(input_words)
-		# spanish_score(input_words)
+		scores = language_scores(input_words)
+    result = language_result(scores)
 	end
- 
-   
-	path_to_file = "spanish_example.txt"
-  language(path_to_file)
 
+	# standard_deviation between all the file occurances
+	# standard_deviation between each language
+
+end
+  
+	path_to_file = "gaelic_example.txt"
+	what_lang = WhatLang.new
+	what_lang.path_to_file = path_to_file
+	puts what_lang.language
