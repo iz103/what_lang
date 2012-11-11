@@ -53,4 +53,13 @@ describe WhatLang do
     end
   end
 
+  describe "language_scores" do
+    it "should return the correct matches" do
+      input_words = ["Hello", "world", "this", "is"]
+      @what_lang.language_scores(input_words)["english_1.txt"].should == 3
+      @what_lang.language_scores(input_words)["gaelic_1.txt"].should == 1
+      @what_lang.language_scores(input_words)["spaish_1.txt"].should == 0
+    end
+  end
+
 end
