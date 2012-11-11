@@ -35,8 +35,7 @@ Producing n-grams may slow processing down, since it dramatically increases the 
 ###Testing the program
 
 To run the program from the console, you can paste the following in what_lang.rb outside the class, and run from the console. Alternativey, see the specs.
-
-  #e.g. path_to_file = "english_example.txt
+ 
   path_to_file = "path/to/text_file"
   what_lang = WhatLang.new
   what_lang.path_to_file = path_to_file
