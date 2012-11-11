@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe WhatLang do
+	
 	it "should return English as the langauge of the text" do
 		path_to_file = "english_example.txt"
 		what_lang = WhatLang.new
