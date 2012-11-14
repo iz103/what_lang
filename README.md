@@ -12,7 +12,7 @@ However, to reduce false positives, the program selects all the files that repre
 
 The code demonstrates the ability to compare parsed text and utilise simple statistical measures to ensure a reasonably accurate language identification.
 
-All the logic is included in one class (WhatLang).  The only other class is the WhatLangController, which inherits from WhatLang. Is a simple interface layer for the user to input a path to a txt file.
+All the logic is included in one class (WhatLang).  The only other class is the WhatLangController, which inherits from WhatLang. Is a simple interface layer for the user to input a path to a txt file, in the terminal.
 
 Within the WhatLang class, the only public method is "language".  All other methods are called from "language" and are therefore private.  However all methods are unit tested, hence, @object.send is used to test the private methods.
 
@@ -26,7 +26,7 @@ rspec spec
 
 - Or from the terminal cd into the program root directory. Run "ruby what_lang_controller.rb". Follow the instructions in the prompt.
 
-Required Dependencies
+###Required Dependencies
   Ruby 1.9.3
   gems:
 	Rspec
@@ -37,7 +37,7 @@ Required Dependencies
 
 To increase accuracy of the results the following suggestions are made:
 
-- Use a larger language reference files, or a higher number of language reference files for comparison.
+- Use larger language reference files, or a higher number of language reference files for comparison.
 
 - construct n-grams of the refercne text (unigrams, bigrams and trigrams).  Also, produce n-grams of the referece text. The matches between reference language n-grams and input text n-grams would be of a higher quality (compared to single words, as used in this program).
 
