@@ -1,8 +1,9 @@
-# require 'pry'
+require 'pry'
 #the language method takes the path to a text file and returns if the text is written in English, Gaelic or Spanish
 #documening tests can be found in the spec directory
 class WhatLang
   attr_accessor :path_to_file
+  # binding.pry
 
   def language
     file = File.open(@path_to_file, "rb")
@@ -16,6 +17,8 @@ class WhatLang
       "cannot identify language from our references, or input text is too short"
     end
   end
+
+  private
 
   def language_scores(input_words)
     scores = Hash.new(0)

@@ -9,7 +9,8 @@ describe WhatLang do
   describe "mean_result" do
     it "should return the correct mean from a hash" do
       h = {"a"=>28, "b"=>21, "c"=>16}
-      @what_lang.mean_result(h).should == 21
+      # @what_lang.mean_result(h).should == 21
+      @what_lang.send(:mean_result, h).should == 21
     end
   end
 
@@ -25,7 +26,7 @@ describe WhatLang do
              "d_2.txt"=>6,
              "d_3.txt"=>3
            }
-      @what_lang.deviation(h,"a").should == true
+      @what_lang.send(:deviation, h,"a").should == true
     end
 
     it "should return the true if the deviation is over the threshold" do
@@ -39,7 +40,7 @@ describe WhatLang do
              "d_2.txt"=>6,
              "d_3.txt"=>3
            }
-      @what_lang.deviation(h,"a").should == nil
+      @what_lang.send(deviation,h,"a").should == nil
     end
   end
 
@@ -49,7 +50,7 @@ describe WhatLang do
            "a_2.txt"=>21,
            "a_3.txt"=>5,
        }
-    @what_lang.language_result(h).should == "a_2.txt"
+    @what_lang.send(language_result, h).should == "a_2.txt"
     end
   end
 
