@@ -6,7 +6,12 @@ class WhatLang
   # binding.pry
 
   def language
-    file = File.open(@path_to_file, "rb")
+    begin
+      file = File.open(@path_to_file, "rb")
+    rescue Errno::ENOENT
+      puts "oops, we can't seem to find the file you entered!  Please try again"
+      return
+    end
     contents = file.read
     input_words = contents.scan(/\w+/)
     scores = language_scores(input_words)
